@@ -1,0 +1,70 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/dataverse-kubernetes:
+      branch: 5.11.1
+      repo: http://github.com/EOSC-synergy/dataverse-kubernetes
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/EOSC-synergy/dataverse-kubernetes git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-salmon-zorse.sh
+        container: qc.acc_muggy-silver-cheetah
+  QC.Doc:
+    repos:
+      github.com/EOSC-synergy/dataverse-kubernetes find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-sapphire-terrier.sh
+        container: qc.doc_slaphappy-turquoise-pinscher
+      github.com/EOSC-synergy/dataverse-kubernetes git:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-emerald-dane.sh
+        container: qc.doc_droopy-red-capybara
+      github.com/EOSC-synergy/dataverse-kubernetes markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-orange-beetle.sh
+        container: qc.doc_bluesy-gold-civet
+      github.com/EOSC-synergy/dataverse-kubernetes restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-alizarin-baboon.sh
+        container: qc.doc_shaky-cerulean-indri
+  QC.Lic:
+    repos:
+      github.com/EOSC-synergy/dataverse-kubernetes licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-grey-wolfhound.sh
+        container: qc.lic_hilly-asparagus-hyena
+  QC.Sec:
+    repos:
+      github.com/EOSC-synergy/dataverse-kubernetes bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-aqua-otter.sh
+        container: qc.sec_beady-seashell-moorhen
+  QC.Sty:
+    repos:
+      github.com/EOSC-synergy/dataverse-kubernetes flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-seashell-avocet.sh
+        container: qc.sty_stealthy-sangria-balinese
+      github.com/EOSC-synergy/dataverse-kubernetes hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-flax-capybara.sh
+        container: qc.sty_tacky-gamboge-capybara
+      github.com/EOSC-synergy/dataverse-kubernetes jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-dandelion-gecko.sh
+        container: qc.sty_flabby-asparagus-rabbit
+  QC.Ver:
+    repos:
+      github.com/EOSC-synergy/dataverse-kubernetes get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-ultramarine-frog.sh
+        container: qc.ver_cloudy-bronze-hyena
+timeout: 1800
